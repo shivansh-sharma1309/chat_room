@@ -1,0 +1,12 @@
+{%block content%}
+<h1>welcome to home page of chat room</h1>
+
+{%for room in rooms%}
+    <div>
+        <h4>
+            {{room.id}} -- <a href="">{{room.name}}</a>
+        </h4>
+    </div>
+{%endfor%}
+
+{%endblock%}
