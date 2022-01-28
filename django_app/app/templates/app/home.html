@@ -1,7 +1,7 @@
 {%extends 'main.html'%}
 {%block content%}
 <h1>welcome to home page of chat room</h1>
-<p><a href="{% url 'CreateRoom' %}">to create new room</a></p>
+<p><a href="CreateRoom/">create new room</a></p>
 <hr>
 {%for room in rooms%}
     <div>
