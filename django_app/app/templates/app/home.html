@@ -1,18 +1,41 @@
 {%extends 'main.html'%}
-{%block content%}
-<h1>welcome to home page of chat room</h1>
-<p><a href="CreateRoom/">create new room</a></p>
-<hr>
-{%for room in rooms%}
-    <div>
-        <h4>
-            <p>@{{room.host}}<span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href='updateRoom/{{room.id}}'>edit</a></span></p>
-            <p><a href="deleteRoom/{{room.id}}">delete</a></p>
-            {{room.id}} -- <a href="room/{{room.id}}">{{room.name}}</a>
-            <p>{{room.topic}}</p>
-            <hr>
-        </h4>
-    </div>
-{%endfor%}
 
+{%block content%}
+
+    <style>
+
+        .home-container
+        {
+            display: grid;
+            grid-template-columns:1fr 3fr;
+        }
+
+    </style>
+
+    <div class="home-container">
+        <div>
+            <h2>Browse Topic</h2>
+            <hr>
+            <p><a href="{%url 'home'%}">All</a></p>
+            {% for topic in topics %}
+                <p><a href="{%url 'home'%}?q={{topic.name}}">{{topic.name}}</a></p>
+            {%endfor%}
+        </div>
+        <div>
+            <h3>welcome to home page of chat room</h3>
+            <p><a href="CreateRoom/">create new room</a></p>
+            <hr>
+            {%for room in rooms%}
+            <div>
+                <h4>
+                    <p>@{{room.host}}<span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href='updateRoom/{{room.id}}'>edit</a></span></p>
+                    <p><a href="deleteRoom/{{room.id}}">delete</a></p>
+                    {{room.id}} -- <a href="room/{{room.id}}">{{room.name}}</a>
+                    <p>{{room.topic}}</p>
+                    <hr>
+                </h4>
+            </div>
+            {%endfor%} 
+        </div>
+    </div>
 {%endblock%}

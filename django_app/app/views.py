@@ -16,12 +16,20 @@ def room(request) :
     ]
 """
 
-from .models import Room
+from .models import Room , Topic
 from .forms import RoomForm
 
 def home(request):
     rooms = Room.objects.all()
-    return render(request,'app/home.html',{'rooms':rooms}) #we can also do this by calling app/template
+    topics = Topic.objects.all()
+    if request.GET.get('q') != None :
+        q = request.GET.get('q') 
+    else :
+        q = ''
+    if q != '':
+        rooms = Room.objects.filter(topic__name__icontains=q)
+        topics = Room.objects.filter(topic__name = q)
+    return render(request,'app/home.html',{'rooms':rooms,'topics':topics}) #we can also do this by calling app/template
     #return render(request,'home.html') ,we can also call home.html from root template folder 
 
 def room(request,pk):

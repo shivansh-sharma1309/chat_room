@@ -25,5 +25,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #path('',home) ->this work to send local httpresponse
     path('',include('app.urls')),
-    path('room/',include('app.urls'))
+    #path('room/',include('app.urls'))
 ]
