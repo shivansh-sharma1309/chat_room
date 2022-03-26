@@ -14,28 +14,34 @@
 
     <div class="home-container">
         <div>
-            <h2>Browse Topic</h2>
+            <h2>Topic</h2>
             <hr>
             <p><a href="{%url 'home'%}">All</a></p>
             {% for topic in topics %}
-                <p><a href="{%url 'home'%}?q={{topic.name}}">{{topic.name}}</a></p>
+                <p><a href="{%url 'home'%}?q={{topic.name}}/x=1">{{topic.name}}</a>&nbsp&nbsp&nbsp{{topic_count}}</p>
             {%endfor%}
         </div>
         <div>
             <h3>welcome to home page of chat room</h3>
+            <h5>{{room_count}}rooms available for you</h5>
             <p><a href="CreateRoom/">create new room</a></p>
             <hr>
             {%for room in rooms%}
             <div>
                 <h4>
-                    <p>@{{room.host}}<span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href='updateRoom/{{room.id}}'>edit</a></span></p>
-                    <p><a href="deleteRoom/{{room.id}}">delete</a></p>
+                    {%if request.user == room.host%}
+                    <span><a href="{%url 'updateRoom'%}?ID={{room.id}}">edit</a></span>&nbsp&nbsp&nbsp
+                    {%endif%}
+                    {%if request.user == room.host%}
+                    <a href="deleteRoom/{{room.id}}">delete</a>
+                    {%endif%}
+                    <p>@{{room.host.username}}</p>
                     {{room.id}} -- <a href="room/{{room.id}}">{{room.name}}</a>
                     <p>{{room.topic}}</p>
                     <hr>
                 </h4>
             </div>
-            {%endfor%} 
+            {%endfor%}
         </div>
     </div>
 {%endblock%}

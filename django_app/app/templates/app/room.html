@@ -1,4 +1,9 @@
 {%extends 'main.html'%}
 {%block content%}
-<h1>{{room.description}}</h1>
+<h2>{{room.name}}</h2>
+<h4>{{room.description}}</h4>
+<form action="room/{{room.id}}/" method="POST">
+<input type="text" name="message" placeholder="message....">
+<input type="submit" placeholder="send">
+</form>
 {%endblock%}
